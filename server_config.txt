@@ -1,0 +1,4 @@
+Server Port: 1666
+Network Interface: ens33
+Server Certificate: /home/server/Downloads/server.crt
+Server Private Key: /home/server/Downloads/server.key

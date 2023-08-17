@@ -1,0 +1,3 @@
+Server IP: 192.168.181.129
+Server Port: 1666
+CA Path: /home/client/Downloads/ca.crt
