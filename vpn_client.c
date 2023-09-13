@@ -358,13 +358,12 @@ void ModifyRoutingTable()
 	char cmd[1024] = {'\0'};
 	
 	system("sysctl -w net.ipv4.ip_forward=1");		/* allow forwarding */
-  	system("iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE");	/* masquerade outgoing traffic - IS THIS NECCESARY???? */
+  	system("iptables -t nat -A POSTROUTING -o tun0 -j MASQUERADE");	/* masquerade outgoing traffic */
 
   	system("iptables -I FORWARD 1 -i tun0 -m state --state RELATED,ESTABLISHED -j ACCEPT");	/* accept return traffic that was established by client */
   	system("iptables -I FORWARD 1 -o tun0 -j ACCEPT");
   	snprintf(cmd, sizeof(cmd), "ip route add %s via %s", server_ip, server_ip);
   	system(cmd);						/* outgoing traffic */
-										/* WHAT ABOUT TRAFFIC TO THE LOCAL VLAN? IT FORWARDS EVERYTHING TO VPN??? */
   	system("ip route add 0/1 dev tun0");
   	system("ip route add 128/1 dev tun0");
 }
